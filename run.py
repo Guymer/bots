@@ -10,6 +10,10 @@ def run(dirOut = "BOTSoutput"):
     from .create_maps import create_maps
     from .create_timeline import create_timeline
 
+    # Make output directory ...
+    if not os.path.exists(dirOut):
+        os.makedirs(dirOut)
+
     # Make database path and create database (if needed) ...
     dbpath = os.path.join(dirOut, "db.json")
     if not os.path.exists(dbpath):
