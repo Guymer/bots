@@ -25,8 +25,8 @@ BOTS requires the following Python modules to be installed and available in your
 
 * cartopy
 * ephem
-* numpy
 * matplotlib
+* numpy
 * pytz
 
 BOTS uses some [Natural Earth](http://www.naturalearthdata.com/) resources via the [Cartopy](http://scitools.org.uk/cartopy/) module. If they do not exist on your system then Cartopy will download them for you in the background. Consequently, a working internet connection may be required the first time you run BOTS.
