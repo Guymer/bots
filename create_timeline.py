@@ -6,6 +6,8 @@ def create_timeline(dirOut, territories, n = 10):
     import datetime
     import ephem
     import matplotlib
+    # NOTE: http://matplotlib.org/faq/howto_faq.html#matplotlib-in-a-web-application-server
+    matplotlib.use("Agg")
     import matplotlib.dates
     import matplotlib.pyplot
     import numpy
