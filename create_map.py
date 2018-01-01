@@ -10,6 +10,7 @@ def create_map(name, territory, fpath):
     matplotlib.use("Agg")
     import matplotlib.pyplot
     import numpy
+    import pyguymer
 
     # Find file containing all the country shapes ...
     shape_file = cartopy.io.shapereader.natural_earth(
@@ -81,7 +82,7 @@ def create_map(name, territory, fpath):
         )
     )
     ax1.set_global()
-    ax1.stock_img()
+    pyguymer.add_map_background(ax1, resolution = "medium2048px")
     ax1.coastlines(
         resolution = "10m",
         color = "black",
@@ -137,7 +138,7 @@ def create_map(name, territory, fpath):
             lat_cor.max() + 1.0
         ]
     )
-    ax2.stock_img()
+    pyguymer.add_map_background(ax2, resolution = "medium2048px")
     ax2.coastlines(
         resolution = "10m",
         color = "black",
