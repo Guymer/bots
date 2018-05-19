@@ -15,7 +15,7 @@ bots.run(dirOut = "myOutput")
 
 All output is saved in `dirOut` which defaults to `BOTSoutput`. BOTS will create a file called `db.json` which will make it run quicker the next time you run it. BOTS with also create a PNG image for every territory so that you know where it is in the world. Finally, BOTS will produce a graph (called `plot.png`) which should look like the one below.
 
-![BOTS output](plot.png)
+![BOTS output](output/plot.png)
 
 The solid coloured bars are the times when the *whole* territory has sunlight and the translucent wings are when *some* of the territory has sunlight. The BAT and [South Georgia & the South Sandwich Islands](https://en.wikipedia.org/wiki/South_Georgia_and_the_South_Sandwich_Islands) have noticeable translucent regions because those territories have large extents.
 
