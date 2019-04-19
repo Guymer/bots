@@ -8,6 +8,11 @@ sunsets of all territories in the BOT. It uses this data to demonstrate that the
 sun has not (yet) set over the BOT.
 """
 
+# Ensure that this module is only imported by Python 2.x ...
+import sys
+if sys.version_info.major != 2:
+    raise Exception("the Python module \"bots\" must only be used with Python 2.x")
+
 # Load sub-functions ...
 from .create_db import create_db
 from .create_map import create_map
