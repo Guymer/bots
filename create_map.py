@@ -67,8 +67,7 @@ def create_map(name, territory, fpath):
     # Create plot ...
     fig = matplotlib.pyplot.figure(
         figsize = (6, 3),
-        dpi = 300,
-        frameon = False
+            dpi = 300
     )
 
     # Create first subplot ...
@@ -78,7 +77,7 @@ def create_map(name, territory, fpath):
         1,
         projection = cartopy.crs.Orthographic(
             central_longitude = lon_avg.mean(),
-            central_latitude = lat_avg.mean()
+             central_latitude = lat_avg.mean()
         )
     )
     ax1.set_global()
@@ -187,7 +186,7 @@ def create_map(name, territory, fpath):
     matplotlib.pyplot.savefig(
         fpath,
         bbox_inches = "tight",
-        dpi = 300,
-        pad_inches = 0.1
+                dpi = 300,
+         pad_inches = 0.1
     )
     matplotlib.pyplot.close("all")

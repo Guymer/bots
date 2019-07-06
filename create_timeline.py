@@ -17,8 +17,7 @@ def create_timeline(dirOut, territories, n = 10):
     # Create plot ...
     fig = matplotlib.pyplot.figure(
         figsize = (12, 6),
-        dpi = 300,
-        frameon = False
+            dpi = 300
     )
     ax = matplotlib.pyplot.subplot()
     ax.xaxis_date()
@@ -146,7 +145,7 @@ def create_timeline(dirOut, territories, n = 10):
     matplotlib.pyplot.savefig(
         os.path.join(dirOut, "plot.png"),
         bbox_inches = "tight",
-        dpi = 300,
-        pad_inches = 0.1
+                dpi = 300,
+         pad_inches = 0.1
     )
     matplotlib.pyplot.close("all")
