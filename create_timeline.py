@@ -162,5 +162,6 @@ def create_timeline(dirOut, territories, n = 10):
                 dpi = 300,
          pad_inches = 0.1
     )
+    pyguymer3.exiftool(os.path.join(dirOut, "plot.png"))
     pyguymer3.optipng(os.path.join(dirOut, "plot.png"))
     matplotlib.pyplot.close("all")

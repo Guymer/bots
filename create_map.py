@@ -190,5 +190,6 @@ def create_map(name, territory, fpath):
                 dpi = 300,
          pad_inches = 0.1
     )
+    pyguymer3.exiftool(fpath)
     pyguymer3.optipng(fpath)
     matplotlib.pyplot.close("all")
