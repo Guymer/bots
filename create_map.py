@@ -1,16 +1,27 @@
-# -*- coding: utf-8 -*-
-
 def create_map(name, territory, fpath):
-    # Import modules ...
-    import cartopy
-    import cartopy.io
-    import cartopy.io.shapereader
-    import matplotlib
-    # NOTE: http://matplotlib.org/faq/howto_faq.html#matplotlib-in-a-web-application-server
-    matplotlib.use("Agg")
-    import matplotlib.pyplot
-    import numpy
-    import pyguymer
+    # Import special modules ...
+    try:
+        import cartopy
+        import cartopy.io
+        import cartopy.io.shapereader
+    except:
+        raise Exception("run \"pip install --user cartopy\"")
+    try:
+        import matplotlib
+        matplotlib.use("Agg")                                                   # NOTE: http://matplotlib.org/faq/howto_faq.html#matplotlib-in-a-web-application-server
+        import matplotlib.pyplot
+    except:
+        raise Exception("run \"pip install --user matplotlib\"")
+    try:
+        import numpy
+    except:
+        raise Exception("run \"pip install --user numpy\"")
+
+    # Import my modules ...
+    try:
+        import pyguymer3
+    except:
+        raise Exception("you need to have the Python module from https://github.com/Guymer/PyGuymer3 located somewhere in your $PYTHONPATH")
 
     # Find file containing all the country shapes ...
     shape_file = cartopy.io.shapereader.natural_earth(
@@ -19,7 +30,7 @@ def create_map(name, territory, fpath):
         name = "admin_0_countries"
     )
 
-    print u"Creating map for \"{0:s}\" ...".format(name)
+    print("Creating map for \"{:s}\" ...".format(name))
 
     # NOTE: The strategy here is to find the bounding boxes of all of the shapes
     #       and locations. Now that the region-of-interest is known the large
@@ -64,11 +75,12 @@ def create_map(name, territory, fpath):
             lon_avg = numpy.append(lon_avg, loc[0])
             lat_avg = numpy.append(lat_avg, loc[1])
 
+    # Check that some points were found ...
+    if lon_cor.size == 0 or lat_cor.size == 0 or lon_avg.size == 0 or lat_avg.size == 0:
+        raise Exception("no points were found for \"{:s}\"".format(name))
+
     # Create plot ...
-    fig = matplotlib.pyplot.figure(
-        figsize = (6, 3),
-            dpi = 300
-    )
+    fg = matplotlib.pyplot.figure(figsize = (6, 3), dpi = 300)
 
     # Create first subplot ...
     ax1 = matplotlib.pyplot.subplot(
@@ -81,12 +93,8 @@ def create_map(name, territory, fpath):
         )
     )
     ax1.set_global()
-    pyguymer.add_map_background(ax1, resolution = "large4096px")
-    ax1.coastlines(
-        resolution = "10m",
-        color = "black",
-        linewidth = 0.1
-    )
+    pyguymer3.add_map_background(ax1, resolution = "large4096px")
+    ax1.coastlines(resolution = "10m", color = "black", linewidth = 0.1)
 
     # Check if countries are defined ...
     if "countries" in territory:
@@ -137,12 +145,8 @@ def create_map(name, territory, fpath):
             lat_cor.max() + 1.0
         ]
     )
-    pyguymer.add_map_background(ax2, resolution = "large4096px")
-    ax2.coastlines(
-        resolution = "10m",
-        color = "black",
-        linewidth = 0.1
-    )
+    pyguymer3.add_map_background(ax2, resolution = "large4096px")
+    ax2.coastlines(resolution = "10m", color = "black", linewidth = 0.1)
 
     # Check if countries are defined ...
     if "countries" in territory:
@@ -179,14 +183,12 @@ def create_map(name, territory, fpath):
             )
 
     # Save plot ...
-    matplotlib.pyplot.title(
-        name,
-        size = "small"
-    )
-    matplotlib.pyplot.savefig(
+    fg.suptitle(name)
+    fg.savefig(
         fpath,
         bbox_inches = "tight",
                 dpi = 300,
          pad_inches = 0.1
     )
+    pyguymer3.optipng(fpath)
     matplotlib.pyplot.close("all")

@@ -1,6 +1,6 @@
 # British Overseas Territories Sunsets (BOTS)
 
-This module contains all the functions required to calculate the sunrises and sunsets of all territories in the [BOT](https://en.wikipedia.org/wiki/British_Overseas_Territories) along with some pretty maps. It uses this data to demonstrate that the sun has not (yet) set over the BOT (thanks to the [Pitcairn Islands](https://en.wikipedia.org/wiki/Pitcairn_Islands) and the [BIOT](https://en.wikipedia.org/wiki/British_Indian_Ocean_Territory), excluding the [BAT](https://en.wikipedia.org/wiki/British_Antarctic_Territory)). This project was inspired by the [What If?](https://what-if.xkcd.com/) blog post [Sunset on the British Empire](https://what-if.xkcd.com/48/).
+This Python 3.x module contains all the functions required to calculate the sunrises and sunsets of all territories in the [BOT](https://en.wikipedia.org/wiki/British_Overseas_Territories) along with some pretty maps. It uses this data to demonstrate that the sun has not (yet) set over the BOT (thanks to the [Pitcairn Islands](https://en.wikipedia.org/wiki/Pitcairn_Islands) and the [BIOT](https://en.wikipedia.org/wiki/British_Indian_Ocean_Territory), excluding the [BAT](https://en.wikipedia.org/wiki/British_Antarctic_Territory)). This project was inspired by the [What If?](https://what-if.xkcd.com/) blog post [Sunset on the British Empire](https://what-if.xkcd.com/48/).
 
 ## Usage
 
@@ -27,7 +27,7 @@ BOTS requires the following Python modules to be installed and available in your
 * [ephem](https://pypi.org/project/ephem)
 * [matplotlib](https://pypi.org/project/matplotlib)
 * [numpy](https://pypi.org/project/numpy)
-* [pyguymer](https://github.com/Guymer/PyGuymer)
+* [pyguymer3](https://github.com/Guymer/PyGuymer3)
 * [pytz](https://pypi.org/project/pytz)
 
 BOTS uses some [Natural Earth](http://www.naturalearthdata.com/) resources via the [Cartopy](http://scitools.org.uk/cartopy/) module. If they do not exist on your system then Cartopy will download them for you in the background. Consequently, a working internet connection may be required the first time you run BOTS.

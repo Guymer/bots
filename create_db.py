@@ -1,11 +1,14 @@
-# -*- coding: utf-8 -*-
-
 def create_db(dbpath):
-    # Import modules ...
-    import cartopy
-    import cartopy.io
-    import cartopy.io.shapereader
+    # Import standard modules ...
     import json
+
+    # Import special modules ...
+    try:
+        import cartopy
+        import cartopy.io
+        import cartopy.io.shapereader
+    except:
+        raise Exception("run \"pip install --user cartopy\"")
 
     # Create dictionary of countries ...
     territories = {
@@ -36,7 +39,7 @@ def create_db(dbpath):
             "countries" : ["Gibraltar"],
         },
         "South Georgia & the South Sandwich Islands" : {
-            "countries" : ["S. Geo. and S. Sandw. Is."],
+            "countries" : ["S. Geo. and the Is."],
         },
         "British Indian Ocean Territory" : {
             "countries" : ["Br. Indian Ocean Ter."],
@@ -67,8 +70,8 @@ def create_db(dbpath):
     )
 
     # Loop over territories ...
-    for territory in territories.iterkeys():
-        print u"Finding locations for \"{0:s}\" ...".format(territory)
+    for territory in territories.keys():
+        print("Finding locations for \"{0:s}\" ...".format(territory))
 
         # Create empty list ...
         territories[territory]["coords"] = []

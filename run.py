@@ -1,11 +1,9 @@
-# -*- coding: utf-8 -*-
-
 def run(dirOut = "BOTSoutput"):
-    # Import modules ...
+    # Import standard modules ...
     import json
     import os
 
-    # Load sub-functions ...
+    # Import sub-functions ...
     from .create_db import create_db
     from .create_maps import create_maps
     from .create_timeline import create_timeline

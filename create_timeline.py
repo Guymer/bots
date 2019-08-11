@@ -1,24 +1,38 @@
-# -*- coding: utf-8 -*-
-
 def create_timeline(dirOut, territories, n = 10):
-    # Import modules ...
+    # Import standard modules ...
     import calendar
     import datetime
-    import ephem
-    import matplotlib
-    # NOTE: http://matplotlib.org/faq/howto_faq.html#matplotlib-in-a-web-application-server
-    matplotlib.use("Agg")
-    import matplotlib.dates
-    import matplotlib.pyplot
-    import numpy
     import os
-    import pytz
+
+    # Import special modules ...
+    try:
+        import ephem
+    except:
+        raise Exception("run \"pip install --user ephem\"")
+    try:
+        import matplotlib
+        matplotlib.use("Agg")                                                   # NOTE: http://matplotlib.org/faq/howto_faq.html#matplotlib-in-a-web-application-server
+        import matplotlib.dates
+        import matplotlib.pyplot
+    except:
+        raise Exception("run \"pip install --user matplotlib\"")
+    try:
+        import numpy
+    except:
+        raise Exception("run \"pip install --user numpy\"")
+    try:
+        import pytz
+    except:
+        raise Exception("run \"pip install --user pytz\"")
+
+    # Import my modules ...
+    try:
+        import pyguymer3
+    except:
+        raise Exception("you need to have the Python module from https://github.com/Guymer/PyGuymer3 located somewhere in your $PYTHONPATH")
 
     # Create plot ...
-    fig = matplotlib.pyplot.figure(
-        figsize = (12, 6),
-            dpi = 300
-    )
+    fg = matplotlib.pyplot.figure(figsize = (12, 6), dpi = 300)
     ax = matplotlib.pyplot.subplot()
     ax.xaxis_date()
     ax.xaxis.grid(True)
@@ -30,8 +44,8 @@ def create_timeline(dirOut, territories, n = 10):
     j = 0
 
     # Loop over territories ...
-    for territory in territories.iterkeys():
-        print u"Finding sunrises and sunsets for \"{0:s}\" ...".format(territory)
+    for territory in territories.keys():
+        print("Finding sunrises and sunsets for \"{:s}\" ...".format(territory))
 
         # Create start date ...
         d0 = ephem.Date((2016, 10, 14, 0, 0, 0))
@@ -43,7 +57,7 @@ def create_timeline(dirOut, territories, n = 10):
         setMaxs = numpy.zeros(n, dtype = numpy.uint64)                          # [s]
 
         # Loop over days ...
-        for i in xrange(n):
+        for i in range(n):
             # Initialize counters ...
             risMins[i] = 2 ** 62                                                # [s]
             setMins[i] = 2 ** 62                                                # [s]
@@ -96,7 +110,7 @@ def create_timeline(dirOut, territories, n = 10):
         x2 = []
         dx1 = []
         dx2 = []
-        for i in xrange(n):
+        for i in range(n):
             x1.append(matplotlib.dates.date2num(datetime.datetime.utcfromtimestamp(risMins[i])))
             x2.append(matplotlib.dates.date2num(datetime.datetime.utcfromtimestamp(risMaxs[i])))
             dx1.append(
@@ -109,20 +123,22 @@ def create_timeline(dirOut, territories, n = 10):
             )
 
         # Plot data ...
-        matplotlib.pyplot.barh(
-            numpy.zeros(n, dtype = numpy.float64) + 0.1 + j,
+        ax.barh(
+            numpy.zeros(n, dtype = numpy.float64) + 0.5 + j,
             dx1,
             height = 0.8,
             left = x1,
+            align = "center",
             alpha = 0.5,
             color = matplotlib.pyplot.cm.rainbow(float(j) / float(len(territories) - 1)),
             linewidth = 0.1
         )
-        matplotlib.pyplot.barh(
-            numpy.zeros(n, dtype = numpy.float64) + 0.1 + j,
+        ax.barh(
+            numpy.zeros(n, dtype = numpy.float64) + 0.5 + j,
             dx2,
             height = 0.8,
             left = x2,
+            align = "center",
             color = matplotlib.pyplot.cm.rainbow(float(j) / float(len(territories) - 1)),
             label = territory,
             linewidth = 0.1
@@ -132,20 +148,19 @@ def create_timeline(dirOut, territories, n = 10):
         j += 1
 
     # Save plot ...
-    matplotlib.pyplot.legend(fontsize = "small")
-    matplotlib.pyplot.title("Sunrises and sunsets in the BOT")
-    matplotlib.pyplot.xlim(
-        [
-            matplotlib.dates.date2num(ephem.Date(d0 + 1).datetime()),
-            matplotlib.dates.date2num(ephem.Date(d0 + n - 2).datetime())
-        ]
+    ax.legend(fontsize = "small")
+    ax.set_title("Sunrises and sunsets in the BOT")
+    ax.set_xlim(
+        matplotlib.dates.date2num(ephem.Date(d0 + 1).datetime()),
+        matplotlib.dates.date2num(ephem.Date(d0 + n - 2).datetime())
     )
-    matplotlib.pyplot.ylim([0, len(territories) - 1])
-    matplotlib.pyplot.yticks([], [])
-    matplotlib.pyplot.savefig(
+    ax.set_ylim(0, len(territories))
+    ax.set_yticks([], [])
+    fg.savefig(
         os.path.join(dirOut, "plot.png"),
         bbox_inches = "tight",
                 dpi = 300,
          pad_inches = 0.1
     )
+    pyguymer3.optipng(os.path.join(dirOut, "plot.png"))
     matplotlib.pyplot.close("all")
