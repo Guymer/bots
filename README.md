@@ -13,7 +13,7 @@ bots.run(dirOut = "myOutput")
 
 ## Example Output
 
-All output is saved in `dirOut` which defaults to `BOTSoutput`. BOTS will create a file called `db.json` which will make it run quicker the next time you run it. BOTS with also create a PNG image for every territory so that you know where it is in the world. Finally, BOTS will produce a graph (called `plot.png`) which should look like the one below.
+All output is saved in `dirOut` which defaults to `BOTSoutput`. BOTS will create a file called [`db.json`](output/db.json) which will make it run quicker the next time you run it. BOTS with also create a PNG image for every territory so that you know where it is in the world. Finally, BOTS will produce a graph (called [`plot.png`](output/plot.png)) which should look like the one below.
 
 ![BOTS output](output/plot.png)
 
