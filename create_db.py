@@ -89,7 +89,8 @@ def create_db(dbpath):
                     # Loop over coordinates ...
                     for coord in boundary.coords:
                         # Extract coordinate and add to list ...
-                        # NOTE: The BAT is a special case as not all of the shape is a BOT.
+                        # NOTE: The BAT is a special case as not all of the
+                        #       shape is a BOT.
                         lon, lat = coord
                         if territory == "British Antarctic Territory":
                             if lon >= -80.0 and lon <= -20.0:

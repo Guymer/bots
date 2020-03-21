@@ -65,7 +65,8 @@ def create_timeline(dirOut, territories, n = 10):
             # Loop over coordinates ...
             for coord in territories[territory]["coords"]:
                 # Update observer ...
-                # HACK: Must be a crude string otherwise it does not set it correctly.
+                # HACK: Must be a crude string otherwise it does not set it
+                #       correctly.
                 obs.long = str(coord[0])
                 obs.lat = str(coord[1])
 
