@@ -11,7 +11,7 @@ def create_timeline(dirOut, territories, n = 10):
         raise Exception("run \"pip install --user ephem\"")
     try:
         import matplotlib
-        matplotlib.use("Agg")                                                   # NOTE: http://matplotlib.org/faq/howto_faq.html#matplotlib-in-a-web-application-server
+        matplotlib.use("Agg")                                                   # NOTE: https://matplotlib.org/gallery/user_interfaces/canvasagg.html
         import matplotlib.dates
         import matplotlib.pyplot
     except:
@@ -92,8 +92,8 @@ def create_timeline(dirOut, territories, n = 10):
                 #         2) it ignores the "tzinfo" data.
                 #       This last point took over an hour to identify. The
                 #       following two threads put me out of my misery:
-                #         1) http://stackoverflow.com/a/19801863/4370547; and
-                #         2) http://bugs.python.org/issue12750#msg142245
+                #         1) https://stackoverflow.com/a/19801863; and
+                #         2) https://bugs.python.org/issue12750#msg142245
                 t1 = int(calendar.timegm(d1.timetuple()))                       # [s]
                 t2 = int(calendar.timegm(d2.timetuple()))                       # [s]
 
