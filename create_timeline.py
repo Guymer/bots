@@ -20,10 +20,6 @@ def create_timeline(dirOut, territories, n = 10):
         import numpy
     except:
         raise Exception("run \"pip install --user numpy\"")
-    try:
-        import pytz
-    except:
-        raise Exception("run \"pip install --user pytz\"")
 
     # Import my modules ...
     try:
@@ -81,8 +77,8 @@ def create_timeline(dirOut, territories, n = 10):
                     continue
 
                 # Convert sunrise and sunset to 'aware' datetime objects in UTC ...
-                d1 = d1.replace(tzinfo = pytz.timezone("UTC"))
-                d2 = d2.replace(tzinfo = pytz.timezone("UTC"))
+                d1 = d1.replace(tzinfo = datetime.timezone.utc)
+                d2 = d2.replace(tzinfo = datetime.timezone.utc)
 
                 # Convert sunrise and sunset to integers since the POSIX epoch ...
                 # NOTE: There are many clunky ways of converting a datetime
