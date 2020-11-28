@@ -8,7 +8,7 @@ def create_db(dbpath):
         import cartopy.io
         import cartopy.io.shapereader
     except:
-        raise Exception("run \"pip install --user cartopy\"")
+        raise Exception("\"cartopy\" is not installed; run \"pip install --user Cartopy\"") from None
 
     # Create dictionary of countries ...
     territories = {

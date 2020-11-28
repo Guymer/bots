@@ -5,17 +5,17 @@ def create_map(name, territory, fpath):
         import cartopy.io
         import cartopy.io.shapereader
     except:
-        raise Exception("run \"pip install --user cartopy\"")
+        raise Exception("\"cartopy\" is not installed; run \"pip install --user Cartopy\"") from None
     try:
         import matplotlib
         matplotlib.use("Agg")                                                   # NOTE: https://matplotlib.org/gallery/user_interfaces/canvasagg.html
         import matplotlib.pyplot
     except:
-        raise Exception("run \"pip install --user matplotlib\"")
+        raise Exception("\"matplotlib\" is not installed; run \"pip install --user matplotlib\"") from None
     try:
         import numpy
     except:
-        raise Exception("run \"pip install --user numpy\"")
+        raise Exception("\"numpy\" is not installed; run \"pip install --user numpy\"") from None
 
     # Import my modules ...
     try:
@@ -77,7 +77,7 @@ def create_map(name, territory, fpath):
 
     # Check that some points were found ...
     if lon_cor.size == 0 or lat_cor.size == 0 or lon_avg.size == 0 or lat_avg.size == 0:
-        raise Exception("no points were found for \"{:s}\"".format(name))
+        raise Exception("no points were found for \"{:s}\"".format(name)) from None
 
     # Create plot ...
     fg = matplotlib.pyplot.figure(figsize = (6, 3), dpi = 300)
