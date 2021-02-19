@@ -160,4 +160,4 @@ def create_timeline(dirOut, territories, n = 10):
          pad_inches = 0.1
     )
     pyguymer3.optimize_image(os.path.join(dirOut, "plot.png"), strip = True)
-    matplotlib.pyplot.close("all")
+    matplotlib.pyplot.close(fg)

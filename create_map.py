@@ -191,4 +191,4 @@ def create_map(name, territory, fpath):
          pad_inches = 0.1
     )
     pyguymer3.optimize_image(fpath, strip = True)
-    matplotlib.pyplot.close("all")
+    matplotlib.pyplot.close(fg)
