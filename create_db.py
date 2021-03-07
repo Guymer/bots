@@ -70,7 +70,7 @@ def create_db(dbpath):
     )
 
     # Loop over territories ...
-    for territory in territories.keys():
+    for territory in territories:
         print("Finding locations for \"{0:s}\" ...".format(territory))
 
         # Create empty list ...
