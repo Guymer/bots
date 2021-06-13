@@ -93,7 +93,7 @@ def create_map(name, territory, fpath):
         )
     )
     ax1.set_global()
-    pyguymer3.add_map_background(ax1, resolution = "large4096px")
+    pyguymer3.geo.add_map_background(ax1, resolution = "large4096px")
     ax1.coastlines(resolution = "10m", color = "black", linewidth = 0.1)
 
     # Check if countries are defined ...
@@ -145,7 +145,7 @@ def create_map(name, territory, fpath):
             lat_cor.max() + 1.0
         ]
     )
-    pyguymer3.add_map_background(ax2, resolution = "large4096px")
+    pyguymer3.geo.add_map_background(ax2, resolution = "large4096px")
     ax2.coastlines(resolution = "10m", color = "black", linewidth = 0.1)
 
     # Check if countries are defined ...
