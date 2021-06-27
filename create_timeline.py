@@ -24,6 +24,7 @@ def create_timeline(dirOut, territories, n = 10):
     # Import my modules ...
     try:
         import pyguymer3
+        import pyguymer3.image
     except:
         raise Exception("\"pyguymer3\" is not installed; you need to have the Python module from https://github.com/Guymer/PyGuymer3 located somewhere in your $PYTHONPATH") from None
 
@@ -159,5 +160,5 @@ def create_timeline(dirOut, territories, n = 10):
                 dpi = 300,
          pad_inches = 0.1
     )
-    pyguymer3.optimize_image(os.path.join(dirOut, "plot.png"), strip = True)
+    pyguymer3.image.optimize_image(os.path.join(dirOut, "plot.png"), strip = True)
     matplotlib.pyplot.close(fg)
