@@ -71,7 +71,7 @@ def create_db(dbpath):
 
     # Loop over territories ...
     for territory in territories:
-        print("Finding locations for \"{0:s}\" ...".format(territory))
+        print(f"Finding locations for \"{territory}\" ...")
 
         # Create empty list ...
         territories[territory]["coords"] = []
@@ -106,9 +106,11 @@ def create_db(dbpath):
                 territories[territory]["coords"].append((loc[0], loc[1]))
 
     # Save database ...
-    json.dump(
-        territories,
-        open(dbpath, "wt"),
-        indent = 4,
-        sort_keys = True
-    )
+    with open(dbpath, "wt", encoding = "utf-8") as fobj:
+        json.dump(
+            territories,
+            fobj,
+            ensure_ascii = False,
+                  indent = 4,
+               sort_keys = True,
+        )

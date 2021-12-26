@@ -18,7 +18,8 @@ def run(dirOut = "BOTSoutput"):
         create_db(dbpath)
 
     # Load database ...
-    territories = json.load(open(dbpath, "rt"))
+    with open(dbpath, "rt", encoding = "utf-8") as fobj:
+        territories = json.load(fobj)
 
     # Create BOT maps ...
     create_maps(dirOut, territories)
