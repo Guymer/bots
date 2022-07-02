@@ -8,6 +8,6 @@ def create_maps(dirOut, territories):
     # Loop over territories ...
     for territory in territories.keys():
         # Make file path and create map (if needed) ...
-        fpath = os.path.join(dirOut, territory.replace(" ", "_") + ".png")
+        fpath = f'{dirOut}/{territory.replace(" ", "_")}.png'
         if not os.path.exists(fpath):
             create_map(territory, territories[territory], fpath)

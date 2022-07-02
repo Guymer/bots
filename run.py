@@ -13,7 +13,7 @@ def run(dirOut = "BOTSoutput"):
         os.makedirs(dirOut)
 
     # Make database path and create database (if needed) ...
-    dbpath = os.path.join(dirOut, "db.json")
+    dbpath = f"{dirOut}/db.json"
     if not os.path.exists(dbpath):
         create_db(dbpath)
 

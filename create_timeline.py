@@ -2,7 +2,6 @@ def create_timeline(dirOut, territories, n = 10):
     # Import standard modules ...
     import calendar
     import datetime
-    import os
 
     # Import special modules ...
     try:
@@ -42,7 +41,7 @@ def create_timeline(dirOut, territories, n = 10):
 
     # Loop over territories ...
     for territory in territories.keys():
-        print("Finding sunrises and sunsets for \"{:s}\" ...".format(territory))
+        print(f"Finding sunrises and sunsets for \"{territory}\" ...")
 
         # Create start date ...
         d0 = ephem.Date((2016, 10, 14, 0, 0, 0))
@@ -124,22 +123,22 @@ def create_timeline(dirOut, territories, n = 10):
         ax.barh(
             numpy.zeros(n, dtype = numpy.float64) + 0.5 + j,
             dx1,
-            height = 0.8,
-            left = x1,
-            align = "center",
-            alpha = 0.5,
-            color = matplotlib.pyplot.cm.rainbow(float(j) / float(len(territories) - 1)),
-            linewidth = 0.1
+               height = 0.8,
+                 left = x1,
+                align = "center",
+                alpha = 0.5,
+                color = matplotlib.pyplot.cm.rainbow(float(j) / float(len(territories) - 1)),
+            linewidth = 0.1,
         )
         ax.barh(
             numpy.zeros(n, dtype = numpy.float64) + 0.5 + j,
             dx2,
-            height = 0.8,
-            left = x2,
-            align = "center",
-            color = matplotlib.pyplot.cm.rainbow(float(j) / float(len(territories) - 1)),
-            label = territory,
-            linewidth = 0.1
+               height = 0.8,
+                 left = x2,
+                align = "center",
+                color = matplotlib.pyplot.cm.rainbow(float(j) / float(len(territories) - 1)),
+                label = territory,
+            linewidth = 0.1,
         )
 
         # Increment counter ...
@@ -155,10 +154,10 @@ def create_timeline(dirOut, territories, n = 10):
     ax.set_ylim(0, len(territories))
     ax.set_yticks([], [])
     fg.savefig(
-        os.path.join(dirOut, "plot.png"),
+        f"{dirOut}/plot.png",
         bbox_inches = "tight",
                 dpi = 300,
-         pad_inches = 0.1
+         pad_inches = 0.1,
     )
-    pyguymer3.image.optimize_image(os.path.join(dirOut, "plot.png"), strip = True)
+    pyguymer3.image.optimize_image(f"{dirOut}/plot.png", strip = True)
     matplotlib.pyplot.close(fg)
