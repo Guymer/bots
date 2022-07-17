@@ -85,15 +85,7 @@ def create_map(name, territory, fpath):
     fg = matplotlib.pyplot.figure(figsize = (6, 3), dpi = 300)
 
     # Create first subplot ...
-    ax1 = matplotlib.pyplot.subplot(
-        1,
-        2,
-        1,
-        projection = cartopy.crs.Orthographic(
-            central_longitude = lon_avg.mean(),
-             central_latitude = lat_avg.mean()
-        )
-    )
+    ax1 = fg.subplot(1, 2, 1, projection = cartopy.crs.Orthographic(central_longitude = lon_avg.mean(), central_latitude = lat_avg.mean()))
     ax1.set_global()
     pyguymer3.geo.add_map_background(ax1, resolution = "large8192px")
     ax1.coastlines(resolution = "10m", color = "black", linewidth = 0.1)
@@ -133,12 +125,7 @@ def create_map(name, territory, fpath):
             )
 
     # Create second subplot ...
-    ax2 = matplotlib.pyplot.subplot(
-        1,
-        2,
-        2,
-        projection = cartopy.crs.PlateCarree()
-    )
+    ax2 = fg.subplot(1, 2, 2, projection = cartopy.crs.PlateCarree())
     ax2.set_extent(
         [
             lon_cor.min() - 1.0,

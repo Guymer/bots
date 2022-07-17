@@ -29,7 +29,7 @@ def create_timeline(dirOut, territories, n = 10):
 
     # Create plot ...
     fg = matplotlib.pyplot.figure(figsize = (12, 6), dpi = 300)
-    ax = matplotlib.pyplot.subplot()
+    ax = fg.add_subplot()
     ax.xaxis_date()
     ax.xaxis.grid(True)
 
