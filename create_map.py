@@ -28,11 +28,11 @@ def create_map(name, territory, fpath):
     # Find file containing all the country shapes ...
     shape_file = cartopy.io.shapereader.natural_earth(
         resolution = "10m",
-        category = "cultural",
-        name = "admin_0_countries"
+          category = "cultural",
+              name = "admin_0_countries",
     )
 
-    print("Creating map for \"{:s}\" ...".format(name))
+    print(f"Creating map for \"{name}\" ...")
 
     # NOTE: The strategy here is to find the bounding boxes of all of the shapes
     #       and locations. Now that the region-of-interest is known the large
@@ -50,8 +50,11 @@ def create_map(name, territory, fpath):
     if "countries" in territory:
         # Loop over records ...
         for record in cartopy.io.shapereader.Reader(shape_file).records():
-            # Skip this record if it is not for a country in the list ...
-            if record.attributes["NAME"] not in territory["countries"]:
+            # Create short-hand ...
+            country = record.attributes["NAME"].replace("\0", "").strip()
+
+            # Skip this country if it is not for a country in the list ...
+            if country not in territory["countries"]:
                 continue
 
             # Find the bounding box ...
@@ -79,7 +82,7 @@ def create_map(name, territory, fpath):
 
     # Check that some points were found ...
     if lon_cor.size == 0 or lat_cor.size == 0 or lon_avg.size == 0 or lat_avg.size == 0:
-        raise Exception("no points were found for \"{:s}\"".format(name)) from None
+        raise Exception(f"no points were found for \"{name}\"") from None
 
     # Create plot ...
     fg = matplotlib.pyplot.figure(figsize = (6, 3), dpi = 300)
@@ -94,18 +97,21 @@ def create_map(name, territory, fpath):
     if "countries" in territory:
         # Loop over records ...
         for record in cartopy.io.shapereader.Reader(shape_file).records():
+            # Create short-hand ...
+            country = record.attributes["NAME"].replace("\0", "").strip()
+
             # Skip this record if it is not for a country in the list ...
-            if record.attributes["NAME"] not in territory["countries"]:
+            if country not in territory["countries"]:
                 continue
 
             # Add areas to plot ...
             ax1.add_geometries(
                 record.geometry,
                 cartopy.crs.PlateCarree(),
-                alpha = 0.5,
-                color = "red",
+                    alpha = 0.5,
+                    color = "red",
                 facecolor = "red",
-                linewidth = 0.1
+                linewidth = 0.1,
             )
 
     # Check if locations are defined ...
@@ -116,12 +122,12 @@ def create_map(name, territory, fpath):
             matplotlib.pyplot.plot(
                 loc[0],
                 loc[1],
-                transform = cartopy.crs.Geodetic(),
-                linestyle = "None",
-                marker = "o",
-                markersize = 2.0,
-                color = "red",
-                antialiased = True
+                  transform = cartopy.crs.Geodetic(),
+                  linestyle = "None",
+                     marker = "o",
+                 markersize = 2.0,
+                      color = "red",
+                antialiased = True,
             )
 
     # Create second subplot ...
@@ -131,7 +137,7 @@ def create_map(name, territory, fpath):
             lon_cor.min() - 1.0,
             lon_cor.max() + 1.0,
             lat_cor.min() - 1.0,
-            lat_cor.max() + 1.0
+            lat_cor.max() + 1.0,
         ]
     )
     pyguymer3.geo.add_map_background(ax2, resolution = "large8192px")
@@ -141,18 +147,21 @@ def create_map(name, territory, fpath):
     if "countries" in territory:
         # Loop over records ...
         for record in cartopy.io.shapereader.Reader(shape_file).records():
+            # Create short-hand ...
+            country = record.attributes["NAME"].replace("\0", "").strip()
+
             # Skip this record if it is not for a country in the list ...
-            if record.attributes["NAME"] not in territory["countries"]:
+            if country not in territory["countries"]:
                 continue
 
             # Add areas to plot ...
             ax2.add_geometries(
                 record.geometry,
                 cartopy.crs.PlateCarree(),
-                alpha = 0.5,
-                color = "red",
+                    alpha = 0.5,
+                    color = "red",
                 facecolor = "red",
-                linewidth = 0.1
+                linewidth = 0.1,
             )
 
     # Check if locations are defined ...
@@ -163,12 +172,12 @@ def create_map(name, territory, fpath):
             matplotlib.pyplot.plot(
                 loc[0],
                 loc[1],
-                transform = cartopy.crs.Geodetic(),
-                linestyle = "None",
-                marker = "o",
-                markersize = 2.0,
-                color = "red",
-                antialiased = True
+                  transform = cartopy.crs.Geodetic(),
+                  linestyle = "None",
+                     marker = "o",
+                 markersize = 2.0,
+                      color = "red",
+                antialiased = True,
             )
 
     # Save plot ...
@@ -177,7 +186,7 @@ def create_map(name, territory, fpath):
         fpath,
         bbox_inches = "tight",
                 dpi = 300,
-         pad_inches = 0.1
+         pad_inches = 0.1,
     )
     pyguymer3.image.optimize_image(fpath, strip = True)
     matplotlib.pyplot.close(fg)

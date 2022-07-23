@@ -65,8 +65,8 @@ def create_db(dbpath):
     # Find file containing all the country shapes ...
     shape_file = cartopy.io.shapereader.natural_earth(
         resolution = "10m",
-        category = "cultural",
-        name = "admin_0_countries"
+          category = "cultural",
+              name = "admin_0_countries",
     )
 
     # Loop over territories ...
@@ -80,8 +80,11 @@ def create_db(dbpath):
         if "countries" in territories[territory]:
             # Loop over records ...
             for record in cartopy.io.shapereader.Reader(shape_file).records():
-                # Skip this record if it is not for a country in the list ...
-                if record.attributes["NAME"] not in territories[territory]["countries"]:
+                # Create short-hand ...
+                country = record.attributes["NAME"].replace("\0", "").strip()
+
+                # Skip this country if it is not for a country in the list ...
+                if country not in territories[territory]["countries"]:
                     continue
 
                 # Loop over boundaries ...
