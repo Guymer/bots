@@ -10,6 +10,13 @@ def create_db(dbpath):
     except:
         raise Exception("\"cartopy\" is not installed; run \"pip install --user Cartopy\"") from None
 
+    # Import my modules ...
+    try:
+        import pyguymer3
+        import pyguymer3.geo
+    except:
+        raise Exception("\"pyguymer3\" is not installed; you need to have the Python module from https://github.com/Guymer/PyGuymer3 located somewhere in your $PYTHONPATH") from None
+
     # Create dictionary of countries ...
     territories = {
         "United Kingdom" : {
@@ -80,23 +87,40 @@ def create_db(dbpath):
         if "countries" in territories[territory]:
             # Loop over records ...
             for record in cartopy.io.shapereader.Reader(shape_file).records():
-                # Create short-hand ...
-                country = record.attributes["NAME"].replace("\0", "").strip()
+                # Create short-hands ...
+                # NOTE: According to the developer of Natural Earth:
+                #           "Because Natural Earth has a more fidelity than ISO,
+                #           and tracks countries that ISO doesn't, Natural Earth
+                #           maintains it's own set of 3-character codes for each
+                #           admin-0 related feature."
+                #       Therefore, when "ISO_A2" or "ISO_A3" are not populated I
+                #       must fall back on "ISO_A2_EH" and "ISO_A3_EH" instead,
+                #       see:
+                #         * https://github.com/nvkelso/natural-earth-vector/issues/268
+                neA2 = record.attributes["ISO_A2"].replace("\x00", " ").strip()
+                neA3 = record.attributes["ISO_A3"].replace("\x00", " ").strip()
+                neCountry = record.attributes["NAME"].replace("\x00", " ").strip()
+                if neA2 == "-99":
+                    print(f"INFO: Falling back on \"ISO_A2_EH\" for \"{neCountry}\".")
+                    neA2 = record.attributes["ISO_A2_EH"].replace("\x00", " ").strip()
+                if neA3 == "-99":
+                    print(f"INFO: Falling back on \"ISO_A3_EH\" for \"{neCountry}\".")
+                    neA3 = record.attributes["ISO_A3_EH"].replace("\x00", " ").strip()
 
                 # Skip this country if it is not for a country in the list ...
-                if country not in territories[territory]["countries"]:
+                if neCountry not in territories[territory]["countries"]:
                     continue
 
                 # Loop over boundaries ...
-                for boundary in record.geometry.boundary:
+                for boundary in pyguymer3.geo.extract_lines(record.geometry.boundary):
                     # Loop over coordinates ...
                     for coord in boundary.coords:
                         # Extract coordinate and add to list ...
                         # NOTE: The BAT is a special case as not all of the
                         #       shape is a BOT.
-                        lon, lat = coord
+                        lon, lat = coord                                        # [°], [°]
                         if territory == "British Antarctic Territory":
-                            if lon >= -80.0 and lon <= -20.0:
+                            if -80.0 <= lon <= -20.0:
                                 territories[territory]["coords"].append((lon, lat))
                         else:
                             territories[territory]["coords"].append((lon, lat))

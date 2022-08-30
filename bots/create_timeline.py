@@ -27,9 +27,16 @@ def create_timeline(dirOut, territories, n = 10):
     except:
         raise Exception("\"pyguymer3\" is not installed; you need to have the Python module from https://github.com/Guymer/PyGuymer3 located somewhere in your $PYTHONPATH") from None
 
-    # Create plot ...
-    fg = matplotlib.pyplot.figure(figsize = (12, 6), dpi = 300)
+    # Create figure ...
+    fg = matplotlib.pyplot.figure(
+            dpi = 300,
+        figsize = (12, 6),
+    )
+
+    # Create axis ...
     ax = fg.add_subplot()
+
+    # Configure axis ...
     ax.xaxis_date()
     ax.xaxis.grid(True)
 
@@ -37,7 +44,7 @@ def create_timeline(dirOut, territories, n = 10):
     obs = ephem.Observer()
 
     # Set counter ...
-    j = 0
+    j = 0                                                                       # [#]
 
     # Loop over territories ...
     for territory in territories.keys():
@@ -63,8 +70,8 @@ def create_timeline(dirOut, territories, n = 10):
                 # Update observer ...
                 # HACK: Must be a crude string otherwise it does not set it
                 #       correctly.
-                obs.long = str(coord[0])
-                obs.lat = str(coord[1])
+                obs.long = str(coord[0])                                        # [°]
+                obs.lat = str(coord[1])                                         # [°]
 
                 # Find sunrise and sunset as 'naive' datetime objects in UTC ...
                 try:
@@ -142,9 +149,9 @@ def create_timeline(dirOut, territories, n = 10):
         )
 
         # Increment counter ...
-        j += 1
+        j += 1                                                                  # [#]
 
-    # Save plot ...
+    # Configure axis ...
     ax.legend(fontsize = "small")
     ax.set_title("Sunrises and sunsets in the BOT")
     ax.set_xlim(
@@ -153,11 +160,20 @@ def create_timeline(dirOut, territories, n = 10):
     )
     ax.set_ylim(0, len(territories))
     ax.set_yticks([], [])
+
+    # Configure figure ...
+    fg.tight_layout()
+
+    # Save figure ...
     fg.savefig(
         f"{dirOut}/plot.png",
-        bbox_inches = "tight",
-                dpi = 300,
-         pad_inches = 0.1,
+               dpi = 300,
+        pad_inches = 0.1,
     )
-    pyguymer3.image.optimize_image(f"{dirOut}/plot.png", strip = True)
     matplotlib.pyplot.close(fg)
+
+    # Optimize PNG ...
+    pyguymer3.image.optimize_image(
+        f"{dirOut}/plot.png",
+        strip = True,
+    )
