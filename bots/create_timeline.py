@@ -1,4 +1,4 @@
-def create_timeline(dirOut, territories, n = 10):
+def create_timeline(dirOut, territories, kwArgCheck = None, n = 10):
     # Import standard modules ...
     import calendar
     import datetime
@@ -26,6 +26,10 @@ def create_timeline(dirOut, territories, n = 10):
         import pyguymer3.image
     except:
         raise Exception("\"pyguymer3\" is not installed; you need to have the Python module from https://github.com/Guymer/PyGuymer3 located somewhere in your $PYTHONPATH") from None
+
+    # Check keyword arguments ...
+    if kwArgCheck is not None:
+        print(f"WARNING: \"{__name__}\" has been called with an extra positional argument")
 
     # Create figure ...
     fg = matplotlib.pyplot.figure(

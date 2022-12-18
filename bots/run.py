@@ -1,4 +1,4 @@
-def run(dirOut = "BOTSoutput"):
+def run(kwArgCheck = None, dirOut = "BOTSoutput", n = 10):
     # Import standard modules ...
     import json
     import os
@@ -7,6 +7,10 @@ def run(dirOut = "BOTSoutput"):
     from .create_db import create_db
     from .create_maps import create_maps
     from .create_timeline import create_timeline
+
+    # Check keyword arguments ...
+    if kwArgCheck is not None:
+        print(f"WARNING: \"{__name__}\" has been called with an extra positional argument")
 
     # Make output directory ...
     if not os.path.exists(dirOut):
@@ -25,4 +29,4 @@ def run(dirOut = "BOTSoutput"):
     create_maps(dirOut, territories)
 
     # Create timeline ...
-    create_timeline(dirOut, territories)
+    create_timeline(dirOut, territories, n = n)
