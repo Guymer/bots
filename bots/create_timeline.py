@@ -13,6 +13,7 @@ def create_timeline(dirOut, territories, kwArgCheck = None, n = 10):
         matplotlib.use("Agg")                                                   # NOTE: See https://matplotlib.org/stable/gallery/user_interfaces/canvasagg.html
         import matplotlib.dates
         import matplotlib.pyplot
+        matplotlib.pyplot.rcParams.update({"font.size" : 8})
     except:
         raise Exception("\"matplotlib\" is not installed; run \"pip install --user matplotlib\"") from None
     try:
