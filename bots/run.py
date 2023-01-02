@@ -22,8 +22,8 @@ def run(kwArgCheck = None, dirOut = "BOTSoutput", n = 10):
         create_db(dbpath)
 
     # Load database ...
-    with open(dbpath, "rt", encoding = "utf-8") as fobj:
-        territories = json.load(fobj)
+    with open(dbpath, "rt", encoding = "utf-8") as fObj:
+        territories = json.load(fObj)
 
     # Create BOT maps ...
     create_maps(dirOut, territories)
