@@ -1,3 +1,6 @@
+#!/usr/bin/env python3
+
+# Define function ...
 def create_db(dbpath):
     # Import standard modules ...
     import json

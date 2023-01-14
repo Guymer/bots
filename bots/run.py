@@ -1,3 +1,6 @@
+#!/usr/bin/env python3
+
+# Define function ...
 def run(kwArgCheck = None, dirOut = "BOTSoutput", n = 10):
     # Import standard modules ...
     import json

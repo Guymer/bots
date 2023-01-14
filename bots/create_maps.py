@@ -1,3 +1,6 @@
+#!/usr/bin/env python3
+
+# Define function ...
 def create_maps(dirOut, territories):
     # Import standard modules ...
     import os

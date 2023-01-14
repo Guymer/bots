@@ -1,3 +1,6 @@
+#!/usr/bin/env python3
+
+# Define function ...
 def create_timeline(dirOut, territories, kwArgCheck = None, n = 10):
     # Import standard modules ...
     import calendar
