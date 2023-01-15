@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 """
 British Overseas Territories Sunsets (BOTS)
 
