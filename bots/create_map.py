@@ -11,9 +11,14 @@ def create_map(name, territory, fpath):
         raise Exception("\"cartopy\" is not installed; run \"pip install --user Cartopy\"") from None
     try:
         import matplotlib
-        matplotlib.use("Agg")                                                   # NOTE: See https://matplotlib.org/stable/gallery/user_interfaces/canvasagg.html
+        matplotlib.rcParams.update(
+            {
+                   "backend" : "Agg",                                           # NOTE: See https://matplotlib.org/stable/gallery/user_interfaces/canvasagg.html
+                "figure.dpi" : 300,
+                 "font.size" : 8,
+            }
+        )
         import matplotlib.pyplot
-        matplotlib.pyplot.rcParams.update({"font.size" : 8})
     except:
         raise Exception("\"matplotlib\" is not installed; run \"pip install --user matplotlib\"") from None
     try:
@@ -89,12 +94,9 @@ def create_map(name, territory, fpath):
         raise Exception(f"no points were found for \"{name}\"") from None
 
     # Create plot ...
-    fg = matplotlib.pyplot.figure(
-            dpi = 300,
-        figsize = (6, 3),
-    )
+    fg = matplotlib.pyplot.figure(figsize = (6, 3))
 
-    # Create axes ...
+    # Create axis ...
     ax1 = fg.add_subplot(
         1,
         2,
@@ -104,6 +106,8 @@ def create_map(name, territory, fpath):
              central_latitude = lat_cen.mean(),
         ),
     )
+
+    # Configure axis ...
     ax1.set_global()
     pyguymer3.geo.add_map_background(ax1, resolution = "large8192px")
     ax1.coastlines(resolution = "10m", color = "black", linewidth = 0.1)
@@ -155,6 +159,8 @@ def create_map(name, territory, fpath):
              central_latitude = lat_cen.mean(),
         ),
     )
+
+    # Configure axis ...
     ax2.set_extent(
         [
             max(-180.0, lon_cor.min() - 1.0),
@@ -208,11 +214,7 @@ def create_map(name, territory, fpath):
     fg.tight_layout()
 
     # Save figure ...
-    fg.savefig(
-        fpath,
-               dpi = 300,
-        pad_inches = 0.1,
-    )
+    fg.savefig(fpath)
     matplotlib.pyplot.close(fg)
 
     # Optimize PNG ...
