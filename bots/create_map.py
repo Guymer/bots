@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # Define function ...
-def create_map(name, territory, fpath):
+def create_map(name, territory, fpath, /):
     # Import special modules ...
     try:
         import cartopy
