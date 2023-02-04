@@ -3,7 +3,6 @@
 # Define function ...
 def create_timeline(dirOut, territories, /, *, n = 10):
     # Import standard modules ...
-    import calendar
     import datetime
 
     # Import special modules ...
@@ -79,7 +78,7 @@ def create_timeline(dirOut, territories, /, *, n = 10):
                 obs.long = str(coord[0])                                        # [°]
                 obs.lat = str(coord[1])                                         # [°]
 
-                # Find sunrise and sunset as 'naive' datetime objects in UTC ...
+                # Find sunrise and sunset as 'naïve' datetime objects in UTC ...
                 try:
                     d1 = obs.next_rising(ephem.Sun(), ephem.Date(d0 + i)).datetime()
                 except ephem.AlwaysUpError:
@@ -93,9 +92,9 @@ def create_timeline(dirOut, territories, /, *, n = 10):
                 d1 = d1.replace(tzinfo = datetime.timezone.utc)
                 d2 = d2.replace(tzinfo = datetime.timezone.utc)
 
-                # Convert sunrise and sunset to integers since the POSIX epoch ...
-                # NOTE: There are many clunky ways of converting a datetime
-                #       object into an integer. The neatest way uses
+                # Convert sunrise and sunset to floats since the POSIX epoch ...
+                # NOTE: There used to be many clunky ways of converting a
+                #       datetime object into a number. The neatest way uses
                 #       "strftime()" but this is bad for two reasons:
                 #         1) it is not supported on Windows; and
                 #         2) it ignores the "tzinfo" data.
@@ -103,8 +102,10 @@ def create_timeline(dirOut, territories, /, *, n = 10):
                 #       following two threads put me out of my misery:
                 #         1) https://stackoverflow.com/a/19801863; and
                 #         2) https://bugs.python.org/issue12750#msg142245
-                t1 = int(calendar.timegm(d1.timetuple()))                       # [s]
-                t2 = int(calendar.timegm(d2.timetuple()))                       # [s]
+                #       Then Python 3.3 came along and added the ".timestamp()"
+                #       method.
+                t1 = d1.timestamp()                                             # [s]
+                t2 = d2.timestamp()                                             # [s]
 
                 # Overwrite counters if needed ...
                 risMins[i] = min(t1, risMins[i])                                # [s]
@@ -112,7 +113,7 @@ def create_timeline(dirOut, territories, /, *, n = 10):
                 setMins[i] = min(t2, setMins[i])                                # [s]
                 setMaxs[i] = max(t2, setMaxs[i])                                # [s]
 
-        # Convert integers since the POSIX epoch to MatPlotLib dates ...
+        # Convert floats since the POSIX epoch to MatPlotLib dates ...
         # NOTE: Just count how many different kinds the same date is represented
         #       with in this script and try to tell me with a straight face that
         #       it is convenient and efficient.
