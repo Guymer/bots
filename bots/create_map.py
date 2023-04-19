@@ -93,6 +93,23 @@ def create_map(name, territory, fpath, /):
     if lon_cor.size == 0 or lat_cor.size == 0 or lon_cen.size == 0 or lat_cen.size == 0:
         raise Exception(f"no points were found for \"{name}\"") from None
 
+    # Create short-hands ...
+    pointLon = lon_cen.mean()                                                   # [°]
+    pointLat = lat_cen.mean()                                                   # [°]
+
+    # Find the maximum distance of any corner from the centre ...
+    maxDist = 0.0                                                               # [m]
+    for iCor in range(lat_cor.size):
+        maxDist = max(
+            maxDist,
+            pyguymer3.geo.calc_dist_between_two_locs(
+                pointLon,
+                pointLat,
+                lon_cor[iCor],
+                lat_cor[iCor],
+            )[0],
+        )                                                                       # [m]
+
     # Create plot ...
     fg = matplotlib.pyplot.figure(figsize = (6, 3))
 
@@ -102,8 +119,8 @@ def create_map(name, territory, fpath, /):
         2,
         1,
         projection = cartopy.crs.Orthographic(
-            central_longitude = lon_cen.mean(),
-             central_latitude = lat_cen.mean(),
+            central_longitude = pointLon,
+             central_latitude = pointLat,
         ),
     )
 
@@ -150,25 +167,17 @@ def create_map(name, territory, fpath, /):
             )
 
     # Create axis ...
-    ax2 = fg.add_subplot(
-        1,
-        2,
-        2,
-        projection = cartopy.crs.Orthographic(
-            central_longitude = lon_cen.mean(),
-             central_latitude = lat_cen.mean(),
-        ),
+    ax2 = pyguymer3.geo.add_top_down_axis(
+        fg,
+        pointLon,
+        pointLat,
+        maxDist + 12.0 * 1852.0,
+        nrows = 1,
+        ncols = 2,
+        index = 2,
     )
 
     # Configure axis ...
-    ax2.set_extent(
-        [
-            max(-180.0, lon_cor.min() - 1.0),
-            min( 180.0, lon_cor.max() + 1.0),
-            max( -90.0, lat_cor.min() - 1.0),
-            min(  90.0, lat_cor.max() + 1.0),
-        ]
-    )
     pyguymer3.geo.add_map_background(ax2, resolution = "large8192px")
     ax2.coastlines(resolution = "10m", color = "black", linewidth = 0.1)
 
