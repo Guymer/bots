@@ -67,8 +67,8 @@ def create_timeline(dirOut, territories, /, *, n = 10):
         # Loop over days ...
         for i in range(n):
             # Initialize counters ...
-            risMins[i] = 2 ** 62                                                # [s]
-            setMins[i] = 2 ** 62                                                # [s]
+            risMins[i] = pow(2, 62)                                             # [s]
+            setMins[i] = pow(2, 62)                                             # [s]
 
             # Loop over coordinates ...
             for coord in territories[territory]["coords"]:
