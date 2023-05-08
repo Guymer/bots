@@ -19,7 +19,6 @@ def create_timeline(dirOut, territories, /, *, n = 10):
                  "font.size" : 8,
             }
         )
-        import matplotlib.dates
         import matplotlib.pyplot
     except:
         raise Exception("\"matplotlib\" is not installed; run \"pip install --user matplotlib\"") from None
