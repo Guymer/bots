@@ -158,7 +158,7 @@ def create_timeline(dirOut, territories, /, *, n = 10):
         j += 1                                                                  # [#]
 
     # Configure axis ...
-    ax.legend(fontsize = "small")
+    ax.legend(loc = "upper center")
     ax.set_title("Sunrises and sunsets in the BOT")
     ax.set_xlim(
         matplotlib.dates.date2num(ephem.Date(d0 + 1).datetime()),
