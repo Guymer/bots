@@ -14,9 +14,10 @@ def create_timeline(dirOut, territories, /, *, n = 10):
         import matplotlib
         matplotlib.rcParams.update(
             {
-                   "backend" : "Agg",                                           # NOTE: See https://matplotlib.org/stable/gallery/user_interfaces/canvasagg.html
-                "figure.dpi" : 300,
-                 "font.size" : 8,
+                       "backend" : "Agg",                                       # NOTE: See https://matplotlib.org/stable/gallery/user_interfaces/canvasagg.html
+                    "figure.dpi" : 300,
+                "figure.figsize" : (9.6, 7.2),                                  # NOTE: See https://github.com/Guymer/misc/blob/main/README.md#matplotlib-figure-sizes
+                     "font.size" : 8,
             }
         )
         import matplotlib.pyplot
@@ -35,7 +36,7 @@ def create_timeline(dirOut, territories, /, *, n = 10):
         raise Exception("\"pyguymer3\" is not installed; you need to have the Python module from https://github.com/Guymer/PyGuymer3 located somewhere in your $PYTHONPATH") from None
 
     # Create figure ...
-    fg = matplotlib.pyplot.figure(figsize = (12, 6))
+    fg = matplotlib.pyplot.figure()
 
     # Create axis ...
     ax = fg.add_subplot()
