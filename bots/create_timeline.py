@@ -2,6 +2,21 @@
 
 # Define function ...
 def create_timeline(dirOut, territories, /, *, n = 10):
+    """Create a timeline
+
+    This function creates a PNG timeline of sunlight for all of the countries in
+    all of the territories.
+
+    Parameters
+    ----------
+    dirOut : str
+        the path to save the PNGs in
+    territories : dict
+        the database
+    n : int, optional
+        the number of days to survey
+    """
+
     # Import standard modules ...
     import datetime
 

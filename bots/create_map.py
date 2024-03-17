@@ -2,6 +2,20 @@
 
 # Define function ...
 def create_map(name, territory, fpath, /):
+    """Create a map of a territory
+
+    This function creates a PNG map of all of the countries in a territory.
+
+    Parameters
+    ----------
+    name : str
+        the name of the territory
+    territory : dict
+        the database entry for the territory
+    fpath : str
+        the path to save the PNG
+    """
+
     # Import standard modules ...
     import os
 

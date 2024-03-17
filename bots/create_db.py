@@ -2,6 +2,17 @@
 
 # Define function ...
 def create_db(dbpath, /):
+    """Create the database of points
+
+    This function creates a database of all of the points along the coastline(s)
+    of each country in each territory.
+
+    Parameters
+    ----------
+    dbpath : str
+        the path to save the database
+    """
+
     # Import standard modules ...
     import json
     import os

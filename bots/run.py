@@ -2,6 +2,19 @@
 
 # Define function ...
 def run(dirOut, /, *, n = 10):
+    """Run BOTS
+
+    This is a wrapper function to call all of the functions in BOTS to create
+    the JSON database, the PNG maps and the PNG timeline.
+
+    Parameters
+    ----------
+    dirOut : str
+        the path to save the database and PNGs in
+    n : int, optional
+        the number of days to survey
+    """
+
     # Import standard modules ...
     import json
     import os
