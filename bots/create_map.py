@@ -116,19 +116,18 @@ def create_map(name, territory, fpath, /):
         fg,
         midLon,
         midLat,
-        1.0e99,
-        nrows = 1,
-        ncols = 2,
         index = 1,
+        ncols = 2,
+        nrows = 1,
     )
     ax2 = pyguymer3.geo.add_topDown_axis(
         fg,
         midLon,
         midLat,
-        maxDist,
-        nrows = 1,
-        ncols = 2,
+         dist = maxDist,
         index = 2,
+        ncols = 2,
+        nrows = 1,
     )
 
     # Configure axes ...
