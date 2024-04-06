@@ -112,7 +112,7 @@ def create_map(name, territory, fpath, /):
     fg = matplotlib.pyplot.figure(figsize = (12.8, 7.2))
 
     # Create axes ...
-    ax1 = pyguymer3.geo.add_top_down_axis(
+    ax1 = pyguymer3.geo.add_topDown_axis(
         fg,
         midLon,
         midLat,
@@ -121,7 +121,7 @@ def create_map(name, territory, fpath, /):
         ncols = 2,
         index = 1,
     )
-    ax2 = pyguymer3.geo.add_top_down_axis(
+    ax2 = pyguymer3.geo.add_topDown_axis(
         fg,
         midLon,
         midLat,
