@@ -101,7 +101,7 @@ def create_map(name, territory, fpath, /):
     if lons.size == 0 or lats.size == 0:
         raise Exception(f"no points were found for \"{name}\"") from None
 
-    # Find the middile of the points ...
+    # Find the middle of the points ...
     midLon, midLat, maxDist = pyguymer3.geo.find_middle_of_locs(
         lons,
         lats,
@@ -112,20 +112,20 @@ def create_map(name, territory, fpath, /):
     fg = matplotlib.pyplot.figure(figsize = (12.8, 7.2))
 
     # Create axes ...
-    ax1 = pyguymer3.geo.add_topDown_axis(
+    ax1 = pyguymer3.geo.add_axis(
         fg,
-        midLon,
-        midLat,
         index = 1,
+          lat = midLat,
+          lon = midLon,
         ncols = 2,
         nrows = 1,
     )
-    ax2 = pyguymer3.geo.add_topDown_axis(
+    ax2 = pyguymer3.geo.add_axis(
         fg,
-        midLon,
-        midLat,
          dist = maxDist,
         index = 2,
+          lat = midLat,
+          lon = midLon,
         ncols = 2,
         nrows = 1,
     )
