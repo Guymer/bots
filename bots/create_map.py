@@ -131,8 +131,6 @@ def create_map(name, territory, fpath, /):
     )
 
     # Configure axes ...
-    pyguymer3.geo.add_coastlines(ax1, resolution = "c")
-    pyguymer3.geo.add_coastlines(ax2, resolution = "f")
     pyguymer3.geo.add_map_background(ax1, resolution = "large0512px")
     pyguymer3.geo.add_map_background(ax2, resolution = "large8192px")
 
