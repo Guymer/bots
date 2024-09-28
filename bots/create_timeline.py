@@ -104,8 +104,8 @@ def create_timeline(dirOut, territories, /, *, n = 10):
                     continue
 
                 # Convert sunrise and sunset to 'aware' datetime objects in UTC ...
-                d1 = d1.replace(tzinfo = datetime.timezone.utc)
-                d2 = d2.replace(tzinfo = datetime.timezone.utc)
+                d1 = d1.replace(tzinfo = datetime.UTC)
+                d2 = d2.replace(tzinfo = datetime.UTC)
 
                 # Convert sunrise and sunset to floats since the POSIX epoch ...
                 # NOTE: There used to be many clunky ways of converting a
