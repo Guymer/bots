@@ -137,15 +137,49 @@ def create_timeline(dirOut, territories, /, *, n = 10):
         dx1 = []
         dx2 = []
         for i in range(n):
-            x1.append(matplotlib.dates.date2num(datetime.datetime.utcfromtimestamp(risMins[i])))
-            x2.append(matplotlib.dates.date2num(datetime.datetime.utcfromtimestamp(risMaxs[i])))
+            x1.append(
+                matplotlib.dates.date2num(
+                    datetime.datetime.fromtimestamp(
+                        risMins[i],
+                        tz = datetime.UTC,
+                    )
+                )
+            )
+            x2.append(
+                matplotlib.dates.date2num(
+                    datetime.datetime.fromtimestamp(
+                        risMaxs[i],
+                        tz = datetime.UTC,
+                    )
+                )
+            )
             dx1.append(
-                matplotlib.dates.date2num(datetime.datetime.utcfromtimestamp(setMaxs[i])) -
-                matplotlib.dates.date2num(datetime.datetime.utcfromtimestamp(risMins[i]))
+                matplotlib.dates.date2num(
+                    datetime.datetime.fromtimestamp(
+                        setMaxs[i],
+                        tz = datetime.UTC,
+                    )
+                ) -
+                matplotlib.dates.date2num(
+                    datetime.datetime.fromtimestamp(
+                        risMins[i],
+                        tz = datetime.UTC,
+                    )
+                )
             )
             dx2.append(
-                matplotlib.dates.date2num(datetime.datetime.utcfromtimestamp(setMins[i])) -
-                matplotlib.dates.date2num(datetime.datetime.utcfromtimestamp(risMaxs[i]))
+                matplotlib.dates.date2num(
+                    datetime.datetime.fromtimestamp(
+                        setMins[i],
+                        tz = datetime.UTC,
+                    )
+                ) -
+                matplotlib.dates.date2num(
+                    datetime.datetime.fromtimestamp(
+                        risMaxs[i],
+                        tz = datetime.UTC,
+                    )
+                )
             )
 
         # Plot data ...
