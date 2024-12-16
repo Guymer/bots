@@ -1,7 +1,13 @@
 #!/usr/bin/env python3
 
 # Define function ...
-def create_db(dbpath, /):
+def create_db(
+    dbpath,
+    /,
+    *,
+    onlyValid = False,
+       repair = False,
+):
     """Create the database of points
 
     This function creates a database of all of the points along the coastline(s)
@@ -11,6 +17,11 @@ def create_db(dbpath, /):
     ----------
     dbpath : str
         the path to save the database
+    onlyValid : bool, optional
+        only return valid Polygons (checks for validity can take a while, if
+        being called often)
+    repair : bool, optional
+        attempt to repair invalid Polygons
     """
 
     # Import standard modules ...
@@ -113,7 +124,11 @@ def create_db(dbpath, /):
                     continue
 
                 # Loop over Polygons ...
-                for poly in pyguymer3.geo.extract_polys(record.geometry):
+                for poly in pyguymer3.geo.extract_polys(
+                    record.geometry,
+                    onlyValid = onlyValid,
+                       repair = repair,
+                ):
                     # Loop over coordinates in exterior ring ...
                     for coord in poly.exterior.coords:
                         # Extract coordinate and add to list ...

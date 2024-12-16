@@ -1,7 +1,18 @@
 #!/usr/bin/env python3
 
 # Define function ...
-def create_map(name, territory, fpath, /):
+def create_map(
+    name,
+    territory,
+    fpath,
+    /,
+    *,
+        debug = __debug__,
+        nIter = 100,
+    onlyValid = False,
+       repair = False,
+      timeout = 60.0,
+):
     """Create a map of a territory
 
     This function creates a PNG map of all of the countries in a territory.
@@ -14,6 +25,17 @@ def create_map(name, territory, fpath, /):
         the database entry for the territory
     fpath : str
         the path to save the PNG
+    debug : bool, optional
+        print debug messages
+    nIter : int, optional
+        the maximum number of iterations (particularly the Vincenty formula)
+    onlyValid : bool, optional
+        only return valid Polygons (checks for validity can take a while, if
+        being called often)
+    repair : bool, optional
+        attempt to repair invalid Polygons
+    timeout : float, optional
+        the timeout for any requests/subprocess calls
     """
 
     # Import standard modules ...
@@ -80,7 +102,11 @@ def create_map(name, territory, fpath, /):
                 continue
 
             # Loop over Polygons ...
-            for poly in pyguymer3.geo.extract_polys(record.geometry):
+            for poly in pyguymer3.geo.extract_polys(
+                record.geometry,
+                onlyValid = onlyValid,
+                   repair = repair,
+            ):
                 # Convert the CoordinateSequence of the exterior LinearRing to a
                 # NumPy array ...
                 points = numpy.array(poly.exterior.coords)                      # [°]
@@ -105,7 +131,15 @@ def create_map(name, territory, fpath, /):
     midLon, midLat, maxDist = pyguymer3.geo.find_middle_of_locs(
         lons,
         lats,
-        pad = 12.0 * 1852.0,
+         angConv = 0.1,
+            conv = 10000.0,                                                     # 10 km
+           debug = debug,
+          method = "GeodesicCircle",
+            nAng = 9,
+           nIter = nIter,
+         nRefine = 6,                                                           # 156.25 m
+             pad = 12.0 * 1852.0,
+        useSciPy = False,
     )                                                                           # [°], [°], [m]
 
     # Create plot ...
@@ -114,25 +148,45 @@ def create_map(name, territory, fpath, /):
     # Create axes ...
     ax1 = pyguymer3.geo.add_axis(
         fg,
-        index = 1,
-          lat = midLat,
-          lon = midLon,
-        ncols = 2,
-        nrows = 1,
+        add_coastlines = True,
+         add_gridlines = True,
+                 debug = debug,
+                 index = 1,
+                   lat = midLat,
+                   lon = midLon,
+                 ncols = 2,
+                 nIter = nIter,
+                 nrows = 1,
+             onlyValid = onlyValid,
+                repair = repair,
     )
     ax2 = pyguymer3.geo.add_axis(
         fg,
-         dist = maxDist,
-        index = 2,
-          lat = midLat,
-          lon = midLon,
-        ncols = 2,
-        nrows = 1,
+        add_coastlines = True,
+         add_gridlines = True,
+                 debug = debug,
+                  dist = maxDist,
+                 index = 2,
+                   lat = midLat,
+                   lon = midLon,
+                 ncols = 2,
+                 nIter = nIter,
+                 nrows = 1,
+             onlyValid = onlyValid,
+                repair = repair,
     )
 
     # Configure axes ...
-    pyguymer3.geo.add_map_background(ax1, resolution = "large0512px")
-    pyguymer3.geo.add_map_background(ax2, resolution = "large8192px")
+    pyguymer3.geo.add_map_background(
+        ax1,
+             debug = debug,
+        resolution = "large0512px",
+    )
+    pyguymer3.geo.add_map_background(
+        ax2,
+             debug = debug,
+        resolution = "large8192px",
+    )
 
     # Check if countries are defined ...
     if "countries" in territory:
@@ -147,7 +201,11 @@ def create_map(name, territory, fpath, /):
 
             # Add Polygons to axes ...
             ax1.add_geometries(
-                pyguymer3.geo.extract_polys(record.geometry),
+                pyguymer3.geo.extract_polys(
+                    record.geometry,
+                    onlyValid = onlyValid,
+                       repair = repair,
+                ),
                 cartopy.crs.PlateCarree(),
                     alpha = 0.5,
                     color = "red",
@@ -155,7 +213,11 @@ def create_map(name, territory, fpath, /):
                 linewidth = 0.1,
             )
             ax2.add_geometries(
-                pyguymer3.geo.extract_polys(record.geometry),
+                pyguymer3.geo.extract_polys(
+                    record.geometry,
+                    onlyValid = onlyValid,
+                       repair = repair,
+                ),
                 cartopy.crs.PlateCarree(),
                     alpha = 0.5,
                     color = "red",
@@ -200,5 +262,7 @@ def create_map(name, territory, fpath, /):
     # Optimize PNG ...
     pyguymer3.image.optimize_image(
         fpath,
-        strip = True,
+          debug = debug,
+          strip = True,
+        timeout = timeout,
     )

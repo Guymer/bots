@@ -1,7 +1,15 @@
 #!/usr/bin/env python3
 
 # Define function ...
-def create_timeline(dirOut, territories, /, *, n = 10):
+def create_timeline(
+    dirOut,
+    territories,
+    /,
+    *,
+      debug = __debug__,
+          n = 10,
+    timeout = 60.0,
+):
     """Create a timeline
 
     This function creates a PNG timeline of sunlight for all of the countries in
@@ -13,8 +21,12 @@ def create_timeline(dirOut, territories, /, *, n = 10):
         the path to save the PNGs in
     territories : dict
         the database
+    debug : bool, optional
+        print debug messages
     n : int, optional
         the number of days to survey
+    timeout : float, optional
+        the timeout for any requests/subprocess calls
     """
 
     # Import standard modules ...
@@ -227,5 +239,7 @@ def create_timeline(dirOut, territories, /, *, n = 10):
     # Optimize PNG ...
     pyguymer3.image.optimize_image(
         f"{dirOut}/plot.png",
-        strip = True,
+          debug = debug,
+          strip = True,
+        timeout = timeout,
     )
