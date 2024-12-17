@@ -10,6 +10,7 @@ def create_maps(
         nIter = 100,
     onlyValid = False,
        repair = False,
+      timeout = 60.0,
 ):
     """Create maps of all the territories
 
@@ -52,4 +53,5 @@ def create_maps(
                     nIter = nIter,
                 onlyValid = onlyValid,
                    repair = repair,
+                  timeout = timeout,
             )

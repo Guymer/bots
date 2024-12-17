@@ -70,6 +70,7 @@ def run(
             nIter = nIter,
         onlyValid = onlyValid,
            repair = repair,
+          timeout = timeout,
     )
 
     # Create timeline ...
