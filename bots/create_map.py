@@ -162,18 +162,19 @@ def create_map(
     )
     ax2 = pyguymer3.geo.add_axis(
         fg,
-        add_coastlines = True,
-         add_gridlines = True,
-                 debug = debug,
-                  dist = maxDist,
-                 index = 2,
-                   lat = midLat,
-                   lon = midLon,
-                 ncols = 2,
-                 nIter = nIter,
-                 nrows = 1,
-             onlyValid = onlyValid,
-                repair = repair,
+          add_coastlines = True,
+           add_gridlines = True,
+                   debug = debug,
+                    dist = maxDist,
+                   index = 2,
+                     lat = midLat,
+                     lon = midLon,
+                   ncols = 2,
+                   nIter = nIter,
+                   nrows = 1,
+               onlyValid = onlyValid,
+                  repair = repair,
+        satellite_height = False,
     )
 
     # Configure axes ...
