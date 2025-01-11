@@ -44,7 +44,7 @@ def create_db(
         import pyguymer3
         import pyguymer3.geo
     except:
-        raise Exception("\"pyguymer3\" is not installed; you need to have the Python module from https://github.com/Guymer/PyGuymer3 located somewhere in your $PYTHONPATH") from None
+        raise Exception("\"pyguymer3\" is not installed; run \"pip install --user PyGuymer3\"") from None
 
     # Create dictionary of countries ...
     territories = {
