@@ -202,7 +202,7 @@ def create_timeline(
                  left = x1,
                 align = "center",
                 alpha = 0.5,
-                color = matplotlib.pyplot.cm.rainbow(float(j) / float(len(territories) - 1)),
+                color = matplotlib.colormaps["rainbow"](float(j) / float(len(territories) - 1)),
             linewidth = 0.1,
         )
         ax.barh(
@@ -211,7 +211,7 @@ def create_timeline(
                height = 0.8,
                  left = x2,
                 align = "center",
-                color = matplotlib.pyplot.cm.rainbow(float(j) / float(len(territories) - 1)),
+                color = matplotlib.colormaps["rainbow"](float(j) / float(len(territories) - 1)),
                 label = territory,
             linewidth = 0.1,
         )
