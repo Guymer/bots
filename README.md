@@ -1,5 +1,7 @@
 # British Overseas Territories Sunsets (BOTS)
 
+!["mypy" GitHub Action Status](https://github.com/Guymer/bots/actions/workflows/mypy.yaml/badge.svg) !["pylint" GitHub Action Status](https://github.com/Guymer/bots/actions/workflows/pylint.yaml/badge.svg)
+
 This Python 3.x module contains all the functions required to calculate the sunrises and sunsets of all territories in the [BOT](https://en.wikipedia.org/wiki/British_Overseas_Territories) along with some pretty maps. It uses this data to demonstrate that the sun has not (yet) set over the BOT (thanks to the [Pitcairn Islands](https://en.wikipedia.org/wiki/Pitcairn_Islands) and the [BIOT](https://en.wikipedia.org/wiki/British_Indian_Ocean_Territory), excluding the [BAT](https://en.wikipedia.org/wiki/British_Antarctic_Territory)). This project was inspired by the [What If?](https://what-if.xkcd.com/) blog post [Sunset on the British Empire](https://what-if.xkcd.com/48/).
 
 ## Usage
