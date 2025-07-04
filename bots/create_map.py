@@ -261,7 +261,7 @@ def create_map(
     matplotlib.pyplot.close(fg)
 
     # Optimize PNG ...
-    pyguymer3.image.optimize_image(
+    pyguymer3.image.optimise_image(
         fpath,
           debug = debug,
           strip = True,

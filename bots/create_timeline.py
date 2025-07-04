@@ -237,7 +237,7 @@ def create_timeline(
     matplotlib.pyplot.close(fg)
 
     # Optimize PNG ...
-    pyguymer3.image.optimize_image(
+    pyguymer3.image.optimise_image(
         f"{dirOut}/plot.png",
           debug = debug,
           strip = True,
