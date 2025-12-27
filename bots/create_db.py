@@ -26,7 +26,6 @@ def create_db(
 
     # Import standard modules ...
     import json
-    import os
     import pathlib
 
     # Import special modules ...

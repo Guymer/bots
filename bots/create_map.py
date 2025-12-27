@@ -39,7 +39,6 @@ def create_map(
     """
 
     # Import standard modules ...
-    import os
     import pathlib
 
     # Import special modules ...
