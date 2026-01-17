@@ -81,9 +81,9 @@ def create_map(
 
     # Find file containing all the country shapes ...
     sfile = cartopy.io.shapereader.natural_earth(
-        resolution = "10m",
           category = "cultural",
               name = "admin_0_countries",
+        resolution = "10m",
     )
 
     print(f"Creating map for \"{name}\" ...")
@@ -182,13 +182,13 @@ def create_map(
     # Configure axes ...
     pyguymer3.geo.add_map_background(
         ax1,
-             debug = debug,
-        resolution = "large0512px",
+          debug = debug,
+        subName = "large0512px",
     )
     pyguymer3.geo.add_map_background(
         ax2,
-             debug = debug,
-        resolution = "large8192px",
+          debug = debug,
+        subName = "large8192px",
     )
 
     # Check if countries are defined ...

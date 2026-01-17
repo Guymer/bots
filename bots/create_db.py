@@ -100,9 +100,9 @@ def create_db(
 
     # Find file containing all the country shapes ...
     sfile = cartopy.io.shapereader.natural_earth(
-        resolution = "10m",
           category = "cultural",
               name = "admin_0_countries",
+        resolution = "10m",
     )
 
     # Loop over territories ...
