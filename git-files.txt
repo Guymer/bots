@@ -12,6 +12,7 @@ bots/create_map.py
 bots/create_maps.py
 bots/create_timeline.py
 bots/run.py
+git-files.txt
 LICENCE.txt
 output/Akrotiri & Dhekelia.png
 output/Anguilla.png
