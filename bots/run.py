@@ -59,7 +59,7 @@ def run(
         )
 
     # Load database ...
-    with open(dbpath, "rt", encoding = "utf-8") as fObj:
+    with open(dbpath, mode = "rt", encoding = "utf-8") as fObj:
         territories = json.load(fObj)
 
     # Create BOT maps ...

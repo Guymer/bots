@@ -149,7 +149,7 @@ def create_db(
                 territories[territory]["coords"].append((loc[0], loc[1]))
 
     # Save database ...
-    with open(dbpath, "wt", encoding = "utf-8") as fObj:
+    with open(dbpath, mode = "wt", encoding = "utf-8") as fObj:
         json.dump(
             territories,
             fObj,
