@@ -106,7 +106,7 @@ def create_db(
     )
 
     # Loop over territories ...
-    for territory in sorted(list(territories.keys())):
+    for territory in sorted(list(territories)):
         print(f"Finding locations for \"{territory}\" ...")
 
         # Create empty list ...
