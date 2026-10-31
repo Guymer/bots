@@ -178,7 +178,6 @@ def create_map(
                    nrows = 1,
                onlyValid = onlyValid,
                   repair = repair,
-        satellite_height = False,
     )
 
     # Configure axes ...
